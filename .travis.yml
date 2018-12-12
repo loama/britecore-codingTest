@@ -5,12 +5,11 @@ install:
   - npm install -g firebase-tools
   - npm install
   - npm run build
-  - npm run unit
 script:
-  -
+  - npm run test:unit
 deploy:
   provider: firebase
   skip_cleanup: true
   token:
     secure: $PRODUCTION_FIREBASE_TOKEN
-  project: "britecore-codingtest"  
+  project: "britecore-codingtest"
