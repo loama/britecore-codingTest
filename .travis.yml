@@ -23,7 +23,7 @@ deploy:
   - provider: firebase
     skip_cleanup: true
     token:
-      secure: $PRODUCTION_FIREBBASE_TOKEN
+      secure: $PRODUCTION_FIREBASE_TOKEN
     project: "britecore-testing"
     on:
       branch: develop
