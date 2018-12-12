@@ -1,5 +1,17 @@
 {
   "projects": {
     "default": "britecore-codingtest"
+  },
+  "targets": {
+    "britecore-codingtest": {
+      "hosting": {
+        "master": [
+          "britecore-codingtest"
+        ],
+        "development": [
+          "britecore-development"
+        ]
+      }
+    }
   }
 }
