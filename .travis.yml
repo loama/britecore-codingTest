@@ -12,18 +12,20 @@ script:
   - npm run test:unit
 
 deploy:
-  - provider: firebase
+  - provider: script
+    script: firebase deploy --non-interactive --token $PRODUCTION_FIREBASE_TOKEN --only hosting:master
     skip_cleanup: true
-    token:
-      secure: $PRODUCTION_FIREBASE_TOKEN
-    project: "britecore-codingtest"
+    # token:
+    #  secure:
+    # project: "britecore-codingtest"
     on:
       branch: master
 
-  - provider: firebase
+  - provider: script
+    script: firebase deploy --non-interactive --token $PRODUCTION_FIREBASE_TOKEN --only hosting:development
     skip_cleanup: true
-    token:
-      secure: $PRODUCTION_FIREBASE_TOKEN
-    project: "britecore-testing"
+    # token:
+    #  secure: $PRODUCTION_FIREASE_TOKEN
+    # project: "britecore-testing"
     on:
       branch: develop

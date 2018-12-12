@@ -9,7 +9,7 @@
           "britecore-codingtest"
         ],
         "development": [
-          "britecore-development"
+          "britecore-develop"
         ]
       }
     }
