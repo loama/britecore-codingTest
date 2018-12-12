@@ -10,9 +10,14 @@ install:
 
 script:
   - npm run test:unit
-  if: branch = master
-    - firebase deploy --token $PRODUCTION_FIREBASE_TOKEN --only hosting:master
 
-  if: branch = development
-    - firebase deploy --token $PRODUCTION_FIREBASE_TOKEN --only hosting:development
-  # 1/IpflK166johcPalilBkCOZfc4m1w1AuPjU9xKRW1ydU
+deploy:
+  - provider: script
+    script: firebase deploy --token $PRODUCTION_FIREBASE_TOKEN --only hosting:master
+    on:
+      branch: master
+
+  - provider: script
+    script: firebase deploy --token $PRODUCTION_FIREBASE_TOKEN --only hosting:develop
+    on:
+      branch: develop
