@@ -14,10 +14,12 @@ script:
 deploy:
   - provider: script
     script: firebase deploy --token $PRODUCTION_FIREBASE_TOKEN --only hosting:master
+    skip_cleanup: true
     on:
       branch: master
 
   - provider: script
     script: firebase deploy --token $PRODUCTION_FIREBASE_TOKEN --only hosting:develop
+    skip_cleanup: true
     on:
       branch: develop
