@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Blank msg="Welcome to Your Vue.js App"/>
+    <Blank msg="This is the master branch"/>
   </div>
 </template>
 
