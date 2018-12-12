@@ -17,6 +17,7 @@ deploy:
     token:
       secure: $PRODUCTION_FIREBASE_TOKEN
     project: "britecore-codingtest"
+    target: "codingtest"
     on:
       branch: master
 
@@ -24,6 +25,7 @@ deploy:
     skip_cleanup: true
     token:
       secure: $PRODUCTION_FIREBASE_TOKEN
-    project: "britecore-testing"
+    project: "britecore-codingtest"
+    target: "testing"
     on:
       branch: develop
