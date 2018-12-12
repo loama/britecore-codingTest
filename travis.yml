@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+  - "node"
+script:
+  -
+deploy:
+  provider: firebase
+  skip_cleanup: true
+  token:
+    secure: $PRODUCTION_FIREBASE_TOKEN
