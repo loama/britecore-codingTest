@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Blank msg="This is the master branch"/>
+    <Blank msg="This is the develop branch"/>
   </div>
 </template>
 
