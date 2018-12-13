@@ -12,6 +12,8 @@ const state = {
 
 const mutations = {
   addPayment (state, payment) {
+    payment.floatAmount = parseFloat(payment.amount).toFixed(2)
+    payment.amount = payment.floatAmount.toString()
     state.payments.push(payment)
   }
 }

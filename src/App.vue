@@ -4,22 +4,30 @@
       <img src="./assets/logo.png" class="logo">
     </div>
 
-    <Blank msg="This is the wowow branch"/>
+    <Payments msg="This is the wowow branch"/>
   </div>
 </template>
 
 <script>
-import Blank from './components/Blank.vue'
+import Payments from './components/Payments.vue'
 
 export default {
   name: 'app',
   components: {
-    Blank
+    Payments
   }
 }
 </script>
 
 <style lang="sass">
+  .noHighlight
+    user-select: none
+    -webkit-user-select: none
+    -ms-user-select: none
+    -webkit-touch-callout: none
+    -o-user-select: none
+    -moz-user-select: none
+
   body, html
     margin: 0
     padding: 0
