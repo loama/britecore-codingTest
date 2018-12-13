@@ -9,23 +9,18 @@ install:
   - npm run build
 
 script:
-  - npm run test:unit
+  # - npm run test:unit
+  - npm run test:e2e
 
 deploy:
   - provider: script
     script: firebase deploy --non-interactive --token $PRODUCTION_FIREBASE_TOKEN --only hosting:master
     skip_cleanup: true
-    # token:
-    #  secure:
-    # project: "britecore-codingtest"
     on:
       branch: master
 
   - provider: script
     script: firebase deploy --non-interactive --token $PRODUCTION_FIREBASE_TOKEN --only hosting:development
     skip_cleanup: true
-    # token:
-    #  secure: $PRODUCTION_FIREASE_TOKEN
-    # project: "britecore-testing"
     on:
       branch: develop

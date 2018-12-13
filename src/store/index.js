@@ -11,19 +11,8 @@ const state = {
 }
 
 const mutations = {
-  updatePayments (state) {
-    let payments = []
-    db.collection('payments').get()
-      .then((snapshot) => {
-        snapshot.forEach((doc) => {
-          // doc.id, '=>', doc.data()
-          payments.push(doc.data())
-        })
-      })
-      .catch((err) => {
-        console.log('Error getting documents', err)
-      })
-    state.payments = payments  
+  addPayment (state, payment) {
+    state.payments.push(payment)
   }
 }
 
