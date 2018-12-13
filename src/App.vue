@@ -39,7 +39,7 @@ export default {
     height: 56px
     width: 100vw
     background: #FFFFFF
-    border-bottom: 1px solid #E0E0E0
+    border-bottom: 1px solid #EEEEEE
 
     .logo
       height: 20px
