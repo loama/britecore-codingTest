@@ -9,15 +9,21 @@
         <div class="section" v-on:click="selectOrderBy('amount')"> amount </div>
       </div>
 
-      <div class="payment" v-for="(payment, idx) in paymentsSorted" :key="payment.id">
-        <div class="id"> {{payment.id}} </div>
-        <div class="name"> {{payment.name}} </div>
-        <div class="description"> {{payment.description}} </div>
+      <div class="payment" v-for="payment in paymentsSorted" :key="payment.id">
+
+        <div class="id" v-html="payment.id"></div>
+
+        <div class="name" v-html="payment.name"></div>
+
+        <div class="description" v-html="payment.description"></div>
+
         <div class="date">
           {{payment.date.split('T')[0]}}
           {{payment.date.split('T')[1].split('-')[0]}}
         </div>
+
         <div class="amount"> {{payment.amount}} </div>
+
       </div>
 
     </div>
@@ -47,35 +53,37 @@ export default {
     }
   },
   computed: {
-    payments () {
+    paymentsFiltered () {
       return this.$store.state.payments
     },
     paymentsSorted () {
+      let list = this.paymentsFiltered
       switch (this.orderBy) {
         case 'name':
           if (this.ascending) {
-            return this.payments.sort((a, b) => (a.name > b.name) - (a.name < b.name))
+            list.sort((a, b) => (a.name > b.name) - (a.name < b.name))
           } else {
-            return this.payments.sort((a, b) => (a.name > b.name) + (a.name < b.name))
+            list.sort((a, b) => (a.name > b.name) + (a.name < b.name))
           }
           break
 
         case 'date':
           if (this.ascending) {
-            return this.payments.sort((a, b) => (a.date > b.date))
+            list.sort((a, b) => (a.date > b.date))
           } else {
-            return this.payments.sort((a, b) => (a.date < b.date))
+            list.sort((a, b) => (a.date < b.date))
           }
           break
 
         case 'amount':
           if (this.ascending) {
-            return this.payments.sort((a, b) => (a.floatAmount) - (b.floatAmount))
+            list.sort((a, b) => (a.floatAmount) - (b.floatAmount))
           } else {
-            return this.payments.sort((a, b) => (b.floatAmount) - (a.floatAmount))
+            list.sort((a, b) => (b.floatAmount) - (a.floatAmount))
           }
           break
       }
+      return list
     }
   }
 }
