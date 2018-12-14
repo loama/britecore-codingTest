@@ -7,10 +7,11 @@
 
     <div class="payments">
       <div class="head noHighlight">
-        <div class="section" v-on:click="selectOrderBy('id')"> Transaction ID </div>
-        <div class="section" v-on:click="selectOrderBy('name')"> name </div>
-        <div class="section" v-on:click="selectOrderBy('date')"> date </div>
-        <div class="section" v-on:click="selectOrderBy('amount')"> amount </div>
+        <div class="section id" v-on:click="selectOrderBy('id')"> Transaction ID </div>
+        <div class="section name" v-on:click="selectOrderBy('name')"> Name </div>
+        <div class="section description"> Description </div>
+        <div class="section date" v-on:click="selectOrderBy('date')"> Date </div>
+        <div class="section amount" v-on:click="selectOrderBy('amount')"> Amount </div>
       </div>
 
       <div class="payment" v-for="payment in paymentsSorted" :key="payment.id">
@@ -139,12 +140,39 @@ export default {
 <style scoped lang="sass">
   .filters
     width: 100vw
-    margin-top: 72px
     height: 24px
     text-align: right
-    margin-bottom: 24px
+    margin-top: 16px
+    margin-bottom: 32px
 
     input.search
+      outline: none
+      border-radius: 2px
+      box-shadow: inset 0 1px 3px #D0D0D0
+      border: none
+      height: 24px
+      padding: 8px
+      font-size: 14px
+
+  .id
+    width: 240px
+
+  .name
+    width: 144px
+
+  .description
+    width: calc(100% - 680px)
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
+
+  .date
+    width: 64px
+    text-align: center
+
+  .amount
+    text-align: right
+    width: 64px
 
   .payments
     margin-bottom: 40px
@@ -155,20 +183,20 @@ export default {
 
     .head
       position: sticky
-      top: 80px
+      top: 0
+      z-index: 1
       background: #FFFFFF
       border-bottom: 1px solid #D0D0D0
 
       .section
+        vertical-align: top
         padding: 16px
         height: 20px
         display: inline-block
-        width: calc(25% - 32px)
         cursor: pointer
 
     .payment
       height: 40px
-      padding: 8px
       border-bottom: 1px solid #F0F0F0
       line-height: 40px
 
@@ -177,13 +205,14 @@ export default {
 
       div
         display: inline-block
-        width: 20%
+        padding: 0 16px
         overflow: hidden
         white-space: nowrap
 
       .id
         text-transform: uppercase
         font-size: 12px
+        text-align: center
 
       .name
         text-transform: capitalize

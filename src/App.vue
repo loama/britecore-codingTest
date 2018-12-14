@@ -44,16 +44,12 @@ export default {
     color: #2c3e50
 
   #navbar
-    position: fixed
-    top: 0
-    left: 0
-    height: 56px
-    width: 100vw
-    background: #FFFFFF
-    border-bottom: 1px solid #EEEEEE
+    position: absolute
 
     .logo
       height: 20px
-      margin-top: 18px
+      margin-top: 8px
       margin-left: 16px
+      -webkit-filter: drop-shadow(0 1px 3px #D0D0D0)
+      filter: drop-shadow(0 1px 3px #D0D0D0)
 </style>
