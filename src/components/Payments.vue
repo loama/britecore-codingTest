@@ -71,7 +71,9 @@ export default {
             id: '',
             name: '',
             month: '',
-            day: ''
+            day: '',
+            date: '',
+            hour: ''
           }
 
           let includesAmount = payments[i].amount.toLowerCase().includes(searchQuery)
@@ -93,6 +95,7 @@ export default {
           payment.day = payments[i].day
           payment.month = payments[i].month
           payment.year = payments[i].year
+          payment.hour = payments[i].hour
 
           if (includesAmount || includesName || includesDescription || includesId) {
             filteredPayments.push(payment)
