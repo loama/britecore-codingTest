@@ -21,3 +21,5 @@ yarn-error.log*
 *.sw*
 firebase-debug.log
 britecore-codingtest-key.json
+tests/e2e/reports/CHROME_70.0.3538.110_Mac OS X_test.xml
+selenium-debug.log

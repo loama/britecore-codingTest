@@ -6,9 +6,9 @@ module.exports = {
     browser
       .url(process.env.VUE_DEV_SERVER_URL)
       .waitForElementVisible('#app', 5000)
-      .assert.elementPresent('.blank')
+      .assert.elementPresent('.payments')
       // .assert.containsText('h1', 'Welcome to Your Vue.js App')
-      .assert.elementCount('img', 1)
+      .assert.elementCount('img', 2)
       .end()
   }
 }
