@@ -28,6 +28,9 @@ export default {
     -o-user-select: none
     -moz-user-select: none
 
+  span.highlighted
+    background-color: yellow
+
   body, html
     margin: 0
     padding: 0

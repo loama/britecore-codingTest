@@ -26,7 +26,7 @@ export const db = firebase.firestore()
 
 Vue.config.productionTip = false
 
-store.commit('updatePayments')
+// store.commit('updatePayments')
 
 db.collection('payments').onSnapshot(snapshot => {
   snapshot.docChanges().forEach(function(change) {
