@@ -1,37 +1,30 @@
 <template>
-  <div class="blank">
-
-    <div class="filters">
-      <input class="search" type="text" v-model="filters.searchQuery" placeholder="filter...">
+  <div class="payments">
+    <div class="head noHighlight">
+      <div class="section id" v-on:click="selectOrderBy('id')"> Transaction ID </div>
+      <div class="section name" v-on:click="selectOrderBy('name')"> Name </div>
+      <div class="section description"> Description </div>
+      <div class="section date" v-on:click="selectOrderBy('date')"> Date </div>
+      <div class="section amount" v-on:click="selectOrderBy('amount')"> Amount </div>
     </div>
 
-    <div class="payments">
-      <div class="head noHighlight">
-        <div class="section id" v-on:click="selectOrderBy('id')"> Transaction ID </div>
-        <div class="section name" v-on:click="selectOrderBy('name')"> Name </div>
-        <div class="section description"> Description </div>
-        <div class="section date" v-on:click="selectOrderBy('date')"> Date </div>
-        <div class="section amount" v-on:click="selectOrderBy('amount')"> Amount </div>
+    <div class="payment" v-for="payment in paymentsSorted" :key="payment.id">
+
+      <div class="id" v-html="payment.id"></div>
+
+      <div class="name" v-html="payment.name"></div>
+
+      <div class="description" v-html="payment.description"></div>
+
+      <div class="date">
+        <div class="hour">{{payment.hour}}</div>
+        <div class="day">{{payment.month}} {{payment.day}}, {{payment.year}}</div>
       </div>
 
-      <div class="payment" v-for="payment in paymentsSorted" :key="payment.id">
-
-        <div class="id" v-html="payment.id"></div>
-
-        <div class="name" v-html="payment.name"></div>
-
-        <div class="description" v-html="payment.description"></div>
-
-        <div class="date">
-          {{payment.date.split('T')[0]}}
-          {{payment.date.split('T')[1].split('-')[0]}}
-        </div>
-
-        <div class="amount" v-html="payment.amount"></div>
-
-      </div>
+      <div class="amount" v-html="payment.amount"></div>
 
     </div>
+
   </div>
 </template>
 
@@ -39,7 +32,7 @@
 export default {
   name: 'Payments',
   props: {
-    msg: String
+    search: String
   },
   data () {
     return {
@@ -62,10 +55,10 @@ export default {
   },
   computed: {
     paymentsFiltered () {
-      if (this.filters.searchQuery !== '') {
+      if (this.search !== '') {
         let filteredPayments = []
         let payments = this.$store.state.payments
-        let searchQuery = this.filters.searchQuery.toLowerCase()
+        let searchQuery = this.search.toLowerCase()
 
         for (let i = 0; i < payments.length; i++) {
 
@@ -75,7 +68,9 @@ export default {
             description: '',
             floatAmount: '',
             id: '',
-            name: ''
+            name: '',
+            month: '',
+            day: ''
           }
 
           let includesAmount = payments[i].amount.toLowerCase().includes(searchQuery)
@@ -93,6 +88,10 @@ export default {
 
           payment.date = payments[i].date
           payment.floatAmount = payments[i].floatAmount
+
+          payment.day = payments[i].day
+          payment.month = payments[i].month
+          payment.year = payments[i].year
 
           if (includesAmount || includesName || includesDescription || includesId) {
             filteredPayments.push(payment)
@@ -138,53 +137,39 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="sass">
-  .filters
-    width: 100vw
-    height: 24px
-    text-align: right
-    margin-top: 16px
-    margin-bottom: 32px
-
-    input.search
-      outline: none
-      border-radius: 2px
-      box-shadow: inset 0 1px 3px #D0D0D0
-      border: none
-      height: 24px
-      padding: 8px
-      font-size: 14px
-
-  .id
-    width: 240px
-
-  .name
-    width: 144px
-
-  .description
-    width: calc(100% - 680px)
-    overflow: hidden
-    text-overflow: ellipsis
-    white-space: nowrap
-
-  .date
-    width: 64px
-    text-align: center
-
-  .amount
-    text-align: right
-    width: 64px
-
   .payments
     margin-bottom: 40px
     border-radius: 2px
+    margin-top: 80px
     width: 100vw
     background: #FFFFFF
     box-shadow: 0 1px 3px #D0D0D0
 
+    .id
+      width: 240px
+
+    .name
+      width: 144px
+
+    .description
+      width: calc(100% - 712px)
+      overflow: hidden
+      text-overflow: ellipsis
+      white-space: nowrap
+
+    .date
+      width: 96px
+      text-align: center
+
+    .amount
+      text-align: right
+      width: 64px
+
     .head
       position: sticky
-      top: 0
+      top: 72px
       z-index: 1
+      margin-top: 112px
       background: #FFFFFF
       border-bottom: 1px solid #D0D0D0
 
@@ -208,6 +193,7 @@ export default {
         padding: 0 16px
         overflow: hidden
         white-space: nowrap
+        vertical-align: top
 
       .id
         text-transform: uppercase
@@ -217,6 +203,26 @@ export default {
       .name
         text-transform: capitalize
         font-size: 16px
+
+      .date
+        position: relative
+        line-height: 20px
+        height: 56px
+
+        .hour
+          position: absolute
+          top: 4px
+          left: 0
+          width: calc(100% - 32px)
+          text-align: center
+
+        .day
+          position: absolute
+          top: 18px
+          left: 0
+          width: calc(100% - 32px)
+          text-align: center
+          font-size: 12px
 
   @media screen and (min-width: 768px)
     .filters
