@@ -143,7 +143,7 @@ export default {
     margin-top: 80px
     width: 100vw
     background: #FFFFFF
-    box-shadow: 0 1px 3px #D0D0D0
+    border: 1px solid #E0E0E0
 
     .id
       width: 240px
@@ -167,11 +167,10 @@ export default {
 
     .head
       position: sticky
-      top: 72px
+      top: 49px
       z-index: 1
-      margin-top: 112px
       background: #FFFFFF
-      border-bottom: 1px solid #D0D0D0
+      border-bottom: 1px solid #E0E0E0
 
       .section
         vertical-align: top

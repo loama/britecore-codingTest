@@ -3,7 +3,7 @@
     <div id="navbar">
       <img src="./assets/logo.png" class="logo">
       <div class="filters">
-        <input class="search" type="text" v-model="searchQuery" placeholder="filter...">
+        <input class="search" type="text" v-model="searchQuery" placeholder="search...">
       </div>
     </div>
 
@@ -62,30 +62,29 @@ export default {
     top: 0
     z-index: 1
     width: 100vw
-    height: 80px
-    background: #0575E6
-    box-shadow: 0 1px 3px #888
+    height: 48px
+    background: #FFFFFF
+    border-bottom: 1px solid #E0E0E0
 
     .logo
       height: 20px
-      margin-top: 8px
+      margin-top: 14px
       margin-left: 16px
-      -webkit-filter: drop-shadow(0 1px 3px #D0D0D0)
-      filter: drop-shadow(0 1px 3px #D0D0D0)
+      display: inline-block
 
     .filters
-      width: 100vw
-      height: 24px
-      text-align: right
-      margin-bottom: 32px
+      position: absolute
+      top: 0
+      right: 0
+      height: 48px
 
       input.search
         outline: none
-        border-radius: 2px
-        box-shadow: inset 0 1px 3px #D0D0D0
         border: none
-        height: 24px
+        border-left: 1px solid #E0E0E0
+        height: 32px
         padding: 8px
+        width: 192px
         font-size: 14px
 
   footer
