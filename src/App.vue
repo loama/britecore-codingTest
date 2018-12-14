@@ -2,12 +2,15 @@
   <div id="app">
     <div id="navbar">
       <img src="./assets/logo.png" class="logo">
+
+      <vue-rangedate-picker @selected="onDateSelected" i18n="EN" />
+      </vue-rangedate-picker>
       <div class="filters">
         <input class="search" type="text" v-model="searchQuery" placeholder="search...">
       </div>
     </div>
 
-    <Payments :search="searchQuery"/>
+    <Payments :search="searchQuery" :dateRange="selectedDate"/>
 
     <footer>
       <a href="https://github.com/loama/britecore-codingTest" target="_blank">
@@ -18,16 +21,40 @@
 </template>
 
 <script>
+import Vue from 'vue'
+import VueRangedatePicker from 'vue-rangedate-picker'
 import Payments from './components/Payments.vue'
+
+Vue.use(VueRangedatePicker)
 
 export default {
   name: 'app',
   components: {
-    Payments
+    Payments,
+    VueRangedatePicker
   },
   data () {
     return {
-      searchQuery: ''
+      searchQuery: '',
+      selectedDate: null
+    }
+  },
+  methods: {
+    onDateSelected: function (daterange) {
+      let start = new Date(daterange.start)
+      start.setDate(start.getDate() - 1)
+
+      let end
+      if (daterange.end !== null) {
+        end = new Date(daterange.end)
+      } else {
+        end = null
+      }
+
+      this.selectedDate = {
+        start: start,
+        end: end
+      }
     }
   }
 }
@@ -60,7 +87,7 @@ export default {
   #navbar
     position: fixed
     top: 0
-    z-index: 1
+    z-index: 10
     width: 100vw
     height: 48px
     background: #FFFFFF
@@ -72,20 +99,34 @@ export default {
       margin-left: 16px
       display: inline-block
 
-    .filters
+    .calendar-root
+      position: absolute
+      top: 0
+      right: 208px
+
+      .input-date
+        height: 36px
+        line-height: 40px
+        width: 220px
+        border: none
+        border-left: 1px solid #E0E0E0
+
+      .calendar
+        right: 0
+        z-index: 10
+
+    input.search
       position: absolute
       top: 0
       right: 0
       height: 48px
-
-      input.search
-        outline: none
-        border: none
-        border-left: 1px solid #E0E0E0
-        height: 32px
-        padding: 8px
-        width: 192px
-        font-size: 14px
+      outline: none
+      border: none
+      border-left: 1px solid #E0E0E0
+      height: 32px
+      padding: 8px
+      width: 192px
+      font-size: 14px
 
   footer
     height: 50px

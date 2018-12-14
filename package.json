@@ -13,6 +13,7 @@
     "firebase": "^5.7.0",
     "node-sass": "^4.9.3",
     "vue": "^2.5.21",
+    "vue-rangedate-picker": "^0.3.4",
     "vuefire": "^1.4.5",
     "vuex": "^3.0.1"
   },

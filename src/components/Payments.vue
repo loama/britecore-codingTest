@@ -32,7 +32,8 @@
 export default {
   name: 'Payments',
   props: {
-    search: String
+    search: String,
+    dateRange: Object
   },
   data () {
     return {
@@ -102,8 +103,33 @@ export default {
         return this.$store.state.payments
       }
     },
+    paymentsDateFiltered () {
+      if (this.dateRange !== null) {
+        let filtered = []
+        for (let i = 0; i < this.paymentsFiltered.length; i++) {
+          let validStart = new Date(this.paymentsFiltered[i].date) > this.dateRange.start
+          var endDate
+
+          let validEnd
+          if (this.dateRange.end !== null) {
+            endDate = this.dateRange.end
+            validEnd = new Date(this.paymentsFiltered[i].date) < endDate
+          } else {
+            validEnd = true
+          }
+
+          if (validStart && validEnd) {
+            filtered.push(this.paymentsFiltered[i])
+          }
+        }
+
+        return filtered
+      } else {
+        return this.paymentsFiltered
+      }
+    },
     paymentsSorted () {
-      let list = this.paymentsFiltered
+      let list = this.paymentsDateFiltered
       switch (this.orderBy) {
         case 'name':
           if (this.ascending) {
